@@ -63,6 +63,9 @@
                                                             Nom
                                                         </th>
                                                         <th>
+                                                            Catégorie
+                                                        </th>
+                                                        <th>
                                                             Quantité
                                                         </th>
                                                         <th>
@@ -81,6 +84,7 @@
                                                     @foreach($materiels as $materiel)
                                                         <tr>
                                                             <td>{{ $materiel->nom }}</td>
+                                                            <td>{{ $materiel->categorie->nom }}</td>
                                                             <td>{{ $materiel->quantite }}</td>
                                                             <td>{{ $materiel->created_at }}</td>
                                                             <td>{{ $materiel->updated_at }}</td>
@@ -105,6 +109,9 @@
                                                     <tr>
                                                         <th>
                                                             Nom
+                                                        </th>
+                                                        <th>
+                                                            Catégorie
                                                         </th>
                                                         <th>
                                                             Quantité

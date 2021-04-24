@@ -2,7 +2,7 @@
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       <!-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
-      <span class="brand-text font-weight-light">Cours en ligne</span>
+      <span class="brand-text font-weight-light">Gestion de demande</span>
     </a>
 
     <!-- Sidebar -->
@@ -64,7 +64,7 @@
             <a href="{{ url('/materiels') }}" class="nav-link @if(Request::is('materiels*')) active @endif">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                {{ __('Gérer les matériels') }}
+                {{ __('Gérer les fournitures') }}
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
