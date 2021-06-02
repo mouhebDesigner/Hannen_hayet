@@ -14,7 +14,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Liste de demandes</h1>
+                            <h1 class="m-0">Liste de materiels</h1>
                         </div><!-- /.col -->
                        
                     </div>
@@ -39,14 +39,14 @@
                                             <div class="d-flex justify-content-between">
                                                 <div id="example1_filter" class="dataTables_filter">
                                                     <label>
-                                                        Search:
+                                                        Chercher:
                                                         <input 
                                                         type="search" class="form-control form-control-sm" 
                                                         placeholder="" 
                                                         aria-controls="example1">
                                                     </label>
                                                 </div>
-                                                <a href="{{ url('chef/demandes/create') }}">
+                                                <a href="{{ url('/directeur/materiels/create') }}">
                                                     <button class="btn-delete">
                                                         <i class="fa fa-plus"></i>
                                                     </button>
@@ -60,7 +60,10 @@
                                                 <thead>
                                                     <tr>
                                                         <th>
-                                                            Materiel
+                                                            Nom
+                                                        </th>
+                                                        <th>
+                                                            Catégorie
                                                         </th>
                                                         <th>
                                                             Quantité
@@ -78,22 +81,23 @@
 
                                                 </thead>
                                                 <tbody>
-                                                    @foreach($demandes as $demande)
+                                                    @foreach($materiels as $materiel)
                                                         <tr>
-                                                            <td>{{ $demande->materiel->nom }}</td>
-                                                            <td>{{ $demande->quantite }}</td>
-                                                            <td>{{ $demande->created_at }}</td>
-                                                            <td>{{ $demande->updated_at }}</td>
+                                                            <td>{{ $materiel->nom }}</td>
+                                                            <td>{{ $materiel->categorie }}</td>
+                                                            <td>{{ $materiel->quantite }}</td>
+                                                            <td>{{ $materiel->created_at }}</td>
+                                                            <td>{{ $materiel->updated_at }}</td>
                                                             <td>
                                                                 <div class="d-flex justify-content-around">
-                                                                    <form action="{{ url('chef/demandes/'.$demande->id) }}" method="post">
+                                                                    <form action="{{ url('directeur/materiels/'.$materiel->id) }}" method="post">
                                                                         @csrf
                                                                         @method('delete')
-                                                                        <button type="submit" class="btn-delete" onclick="return confirm('Voules-vous supprimer cette demande')">
+                                                                        <button type="submit" class="btn-delete" onclick="return confirm('Voules-vous supprimer ce materiel')">
                                                                             <i class="fa fa-trash"></i>
                                                                         </button>
                                                                     </form>
-                                                                    <a href="{{ url('chef/demandes/'.$demande->id.'/edit') }}" onclick="return confirm('Voules-vous modifier cette demande')">
+                                                                    <a href="{{ url('directeur/materiels/'.$materiel->id.'/edit') }}" onclick="return confirm('Voules-vous modifier ce materiel')">
                                                                         <i class="fa fa-edit"></i>
                                                                     </a>
                                                                 </div>
@@ -104,7 +108,10 @@
                                                 <tfoot>
                                                     <tr>
                                                         <th>
-                                                            Materiel
+                                                            Nom
+                                                        </th>
+                                                        <th>
+                                                            Catégorie
                                                         </th>
                                                         <th>
                                                             Quantité
@@ -118,9 +125,11 @@
                                                         <th>
                                                             Actions
                                                         </th>
+
                                                     </tr>
                                                 </tfoot>
                                             </table>
+                                            {{ $materiels->links() }}
                                         </div>
                                     </div>
                                 </div>

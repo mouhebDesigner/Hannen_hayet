@@ -14,7 +14,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Liste de demandes</h1>
+                            <h1 class="m-0">Liste des incidents</h1>
                         </div><!-- /.col -->
                        
                     </div>
@@ -46,7 +46,7 @@
                                                         aria-controls="example1">
                                                     </label>
                                                 </div>
-                                                <a href="{{ url('chef/demandes/create') }}">
+                                                <a href="{{ url('chef/incidents/create') }}">
                                                     <button class="btn-delete">
                                                         <i class="fa fa-plus"></i>
                                                     </button>
@@ -60,16 +60,13 @@
                                                 <thead>
                                                     <tr>
                                                         <th>
-                                                            Materiel
+                                                            Titre
                                                         </th>
                                                         <th>
-                                                            Quantité
+                                                            Date de création
                                                         </th>
                                                         <th>
-                                                            date de creation
-                                                        </th>
-                                                        <th>
-                                                            date de modification
+                                                            Date de modification
                                                         </th>
                                                         <th>
                                                             Actions
@@ -78,22 +75,21 @@
 
                                                 </thead>
                                                 <tbody>
-                                                    @foreach($demandes as $demande)
+                                                    @foreach($incidents as $incident)
                                                         <tr>
-                                                            <td>{{ $demande->materiel->nom }}</td>
-                                                            <td>{{ $demande->quantite }}</td>
-                                                            <td>{{ $demande->created_at }}</td>
-                                                            <td>{{ $demande->updated_at }}</td>
+                                                            <td>{{ $incident->titre }}</td>
+                                                            <td>{{ $incident->created_at->diffForHumans() }}</td>
+                                                            <td>{{ $incident->updated_at->diffForHumans() }}</td>
                                                             <td>
                                                                 <div class="d-flex justify-content-around">
-                                                                    <form action="{{ url('chef/demandes/'.$demande->id) }}" method="post">
+                                                                    <form action="{{ url('chef/incidents/'.$incident->id) }}" method="post">
                                                                         @csrf
                                                                         @method('delete')
                                                                         <button type="submit" class="btn-delete" onclick="return confirm('Voules-vous supprimer cette demande')">
                                                                             <i class="fa fa-trash"></i>
                                                                         </button>
                                                                     </form>
-                                                                    <a href="{{ url('chef/demandes/'.$demande->id.'/edit') }}" onclick="return confirm('Voules-vous modifier cette demande')">
+                                                                    <a href="{{ url('chef/incidents/'.$incident->id.'/edit') }}" onclick="return confirm('Voules-vous modifier cette demande')">
                                                                         <i class="fa fa-edit"></i>
                                                                     </a>
                                                                 </div>
@@ -104,16 +100,13 @@
                                                 <tfoot>
                                                     <tr>
                                                         <th>
-                                                            Materiel
+                                                            Titre
                                                         </th>
                                                         <th>
-                                                            Quantité
+                                                            Date de création
                                                         </th>
                                                         <th>
-                                                            date de creation
-                                                        </th>
-                                                        <th>
-                                                            date de modification
+                                                            Date de modification
                                                         </th>
                                                         <th>
                                                             Actions

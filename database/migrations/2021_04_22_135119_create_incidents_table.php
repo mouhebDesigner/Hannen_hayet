@@ -18,6 +18,7 @@ class CreateIncidentsTable extends Migration
             $table->string('titre');
             $table->text('description');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('technicien_id')->constrained('users')->nullable()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

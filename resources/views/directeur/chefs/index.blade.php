@@ -14,7 +14,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Liste de materiels</h1>
+                            <h1 class="m-0">Liste des chefs</h1>
                         </div><!-- /.col -->
                        
                     </div>
@@ -22,7 +22,8 @@
             </div>
             <div class="content">
                 <div class="container-fluid">
-                    @include('includes.error-message')
+                @include('includes.error-message')
+
                     <div class="row">
                         <div class="col-12">
                             
@@ -46,10 +47,8 @@
                                                         aria-controls="example1">
                                                     </label>
                                                 </div>
-                                                <a href="{{ url('/materiels/create') }}">
-                                                    <button class="btn-delete">
-                                                        <i class="fa fa-plus"></i>
-                                                    </button>
+                                                <a href="{{ url('directeur/chefs/create') }}">
+                                                    <i class="fa fa-plus"></i>
                                                 </a>
                                             </div>
                                         </div>
@@ -63,41 +62,42 @@
                                                             Nom
                                                         </th>
                                                         <th>
-                                                            Catégorie
+                                                            Email
                                                         </th>
                                                         <th>
-                                                            Quantité
+                                                            Numéro de téléphone
                                                         </th>
+                                                        
                                                         <th>
                                                             date de creation
                                                         </th>
+                                                        
                                                         <th>
                                                             date de modification
                                                         </th>
                                                         <th>
-                                                            Actions
+                                                            Action
                                                         </th>
                                                     </tr>
-
                                                 </thead>
                                                 <tbody>
-                                                    @foreach($materiels as $materiel)
+                                                    @foreach($chefs as $chef)
                                                         <tr>
-                                                            <td>{{ $materiel->nom }}</td>
-                                                            <td>{{ $materiel->categorie->nom }}</td>
-                                                            <td>{{ $materiel->quantite }}</td>
-                                                            <td>{{ $materiel->created_at }}</td>
-                                                            <td>{{ $materiel->updated_at }}</td>
+                                                            <td>{{ $chef->name }}</td>
+                                                            <td>{{ $chef->email }}</td>
+                                                            <td>{{ $chef->numtel }}</td>
+                                                            <td>{{ $chef->created_at }}</td>
+                                                            <td>{{ $chef->updated_at }}</td>
                                                             <td>
                                                                 <div class="d-flex justify-content-around">
-                                                                    <form action="{{ url('/materiels/'.$materiel->id) }}">
+                                                                    <form action="{{ url('directeur/chefs/'.$chef->id) }}" method="post">
                                                                         @csrf
                                                                         @method('delete')
-                                                                        <button type="submit" class="btn-delete" onclick="return confirm('Voules-vous supprimer ce materiel')">
+                                                                        <button type="submit" class="btn-delete" onclick="return confirm('Voules-vous supprimer ce chef')">
                                                                             <i class="fa fa-trash"></i>
                                                                         </button>
                                                                     </form>
-                                                                    <a href="{{ url('/materiels/'.$materiel->id.'/edit') }}" onclick="return confirm('Voules-vous modifier ce materiel')">
+                                                                    <a href="{{ url('directeur/chefs/'.$chef->id.'/edit') }}" onclick="return confirm('Voules-vous modifier ce chef')">
                                                                         <i class="fa fa-edit"></i>
                                                                     </a>
                                                                 </div>
@@ -111,21 +111,22 @@
                                                             Nom
                                                         </th>
                                                         <th>
-                                                            Catégorie
+                                                            Email
                                                         </th>
                                                         <th>
-                                                            Quantité
+                                                            Numéro de téléphone
                                                         </th>
+                                                        
                                                         <th>
                                                             date de creation
                                                         </th>
+                                                        
                                                         <th>
                                                             date de modification
                                                         </th>
                                                         <th>
-                                                            Actions
+                                                            Action
                                                         </th>
-
                                                     </tr>
                                                 </tfoot>
                                             </table>

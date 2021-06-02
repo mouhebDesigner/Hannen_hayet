@@ -21,17 +21,19 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="{{ url('materiels') }}" method="post" enctype="multipart/form-data">
-                        @csrf
+                        <form action="{{ url('directeur/materiels') }}" method="post" enctype="multipart/form-data">
+                            @csrf
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="categorie">Catégorie</label>
-                                    <select name="categorie_id" id="categorie" class="form-control">
+                                    <select name="categorie" id="categorie" class="form-control">
                                         <option value="" selected disbaled>Choisir catégorie</option>
-                                        @foreach(App\Models\Categorie::all() as $categorie)
-                                            <option value="{{ $categorie->id }}">{{ $categorie->nom }}</option>
-                                        @endforeach
+                                        <option value="papier">Papier</option>
+                                        <option value="materiel">Matériel</option>
                                     </select>
+                                    @error('categorie')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="nom">Nom de materiel</label>

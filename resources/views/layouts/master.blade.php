@@ -24,9 +24,9 @@
     @yield('content')
     <!-- jQuery -->
 
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-    @yield('script')
     <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+    @yield('script')
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- Bootstrap -->
     <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE -->

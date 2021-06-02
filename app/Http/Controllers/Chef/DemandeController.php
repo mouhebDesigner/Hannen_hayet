@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Chef;
 
-use Auth;
 use App\Models\Demande;
 use Illuminate\Http\Request;
-use App\Http\Requests\DemandeRequest;
-
+use App\Http\Controllers\Controller;
+use Auth;
 class DemandeController extends Controller
 {
      /**
@@ -49,7 +48,7 @@ class DemandeController extends Controller
 
         $demande->save();
 
-        return redirect('/demandes')->with('added', 'La demande a été ajouté avec succés');
+        return redirect('chef/demandes')->with('added', 'La demande a été ajouté avec succés');
     }
 
     /**
@@ -94,7 +93,7 @@ class DemandeController extends Controller
 
         $demande->save();
 
-        return redirect('demandes')->with('updated', 'La demande a été modifié avec succés');
+        return redirect('chef/demandes')->with('updated', 'La demande a été modifié avec succés');
     }
 
     /**
@@ -106,7 +105,7 @@ class DemandeController extends Controller
     public function destroy($id)
     {
         Demande::find($id)->delete();
-        return redirect('demandes')->with('deleted', 'La demande a été supprimer avec succés');
+        return redirect('chef/demandes')->with('deleted', 'La demande a été supprimer avec succés');
         
     }
 }

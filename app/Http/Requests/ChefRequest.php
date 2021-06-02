@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MaterielRequest extends FormRequest
+class ChefRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,10 @@ class MaterielRequest extends FormRequest
     public function rules()
     {
         return [
-            "nom" => "required",
-            "quantite" => "required",
-            "categorie" => "required"
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name' => ['required', 'string', 'max:255'],
+            'numtel' => ['required', 'numeric', 'digits:8'],
         ];
     }
 }

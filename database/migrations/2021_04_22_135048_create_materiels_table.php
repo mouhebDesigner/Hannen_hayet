@@ -17,7 +17,7 @@ class CreateMaterielsTable extends Migration
             $table->id();
             $table->string('nom');
             $table->biginteger('quantite');
-            $table->foreignId('categorie_id')->constrained('categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->enum('categorie', ['papier', 'materiel']);
             $table->timestamps();
         });
     }

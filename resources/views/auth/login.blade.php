@@ -1,49 +1,39 @@
-@extends('layouts.master')
-
-@section('content')
-<div class="login-box">
-      <div class="login-logo">
-        <a href="../../index2.html"><b>Interface de connexion</a>
-      </div><!-- /.login-logo -->
-      <div class="login-box-body">
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-          <div class="form-group has-feedback">
-            <input type="email" name="email" class="form-control"  placeholder="Email">
-            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-            @error('email')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-          </div>
-          <div class="form-group has-feedback">
-            <input type="password" name="password" class="form-control"    placeholder="Mot de passe">
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-          </div>
-          <div class="row">
-            <div class="col-xs-4">
-              <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary btn-block btn-flat">Connecter</button>
-              </div>
-            </div><!-- /.col -->
-          </div>
-        </form>
-
-        <!-- /.social-auth-links -->
-        @if (Route::has('password.request'))
-            <a class="btn btn-link" href="{{ route('password.request') }}">
-                {{ __('Mot de pass oublié') }}
-            </a>
-        @endif
-        
-        
-
-      </div><!-- /.login-box-body -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+</head>
+<body>
+    <h2 style="margin-top:-50px">Gestion de demandes</h2>
+    <div id="login" class="login-form-container">
+        <header>Connexion</header>
+        <fieldset>
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+                <div class="input-wrapper">
+                    <input type="text" name="email"  placeholder="exemple@email.com" />
+                </div>
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                <div class="input-wrapper">
+                    <input type="password" name="password" placeholder="Mot de passe" />
+                </div>
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                <button id="continue" type="submit">Connecter</button>
+            </form>
+        </fieldset>
     </div>
-@endsection
+    <script src="{{ asset('js/login.js') }}"></script>
+</body>
+</html>

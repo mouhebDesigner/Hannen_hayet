@@ -2,9 +2,12 @@
 
 use App\Models\Materiel;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DemandeController;
-use App\Http\Controllers\MaterielController;
-use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\directeur\ChefController;
+use App\Http\Controllers\chef\DemandeController;
+use App\Http\Controllers\chef\IncidentController as IncidentController_chef;
+use App\Http\Controllers\directeur\IncidentController as IncidentController_directeur;
+use App\Http\Controllers\directeur\MaterielController;
+use App\Http\Controllers\directeur\CategorieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,16 +19,25 @@ use App\Http\Controllers\CategorieController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/materiel_list/{categorie_id}', function($categorie_id){
-    $materiels = Materiel::where('categorie_id', $categorie_id)->get();
-    return response()->json($materiels);
+
+Route::prefix('directeur')->group(function () {
+
+    Route::get('/materiel_list/{categorie}', function($categorie){
+        $materiels = Materiel::where('categorie', $categorie)->get();
+        return response()->json($materiels);
+    });
+    Route::resource('materiels', MaterielController::class);
+    Route::resource('chefs', ChefController::class);
+    Route::resource('incidents', IncidentController_directeur::class);
 });
-Route::resource('categories', CategorieController::class);
-Route::resource('materiels', MaterielController::class);
-Route::resource('demandes', DemandeController::class);
+Route::prefix('chef')->group(function () {
+    Route::resource('demandes', DemandeController::class);
+    Route::resource('incidents', IncidentController_chef::class);
+});
+
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();

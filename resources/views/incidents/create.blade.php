@@ -8,7 +8,7 @@
         <div class="content-wrapper">
             <section class="content-header">
                 <h1>
-                    Ajouter une demande 
+                    Déclarer un incident 
                 </h1>
             </section>
             <section class="content">
@@ -21,40 +21,14 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="{{ url('demandes') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('chef/incidents') }}" method="post" enctype="multipart/form-data">
                         @csrf
                             <div class="card-body">
+                                
                                 <div class="form-group">
-                                    <label for="categorie">Catégorie</label>
-                                    <select name="categorie" id="categorie" class="form-control">
-                                        <option value="" selected disbaled>Choisir catégorie</option>
-                                        <option value="papier">Papier</option>
-                                        <option value="materiel">Matériel</option>
-                                    </select>
-                                    @error('categorie')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="materiel_id">Materiel</label>
-                                    <select name="materiel_id" id="materiel_id" class="form-control">
-                                        <option value="" selected disbaled>Choisir materiel</option>
-                                    </select>
-                                    @error('materiel_id')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="quantite">Quantité de materiel</label>
-                                    <input type="number" class="form-control" name="quantite" value="{{ old('quantite') }}" id="quantite" placeholder="Saisir quantite de materiel">
-                                    @error('quantite')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="date">Date</label>
-                                    <input type="date" class="form-control" name="date" value="{{ old('date') }}" id="date" placeholder="Saisir date de materiel">
-                                    @error('date')
+                                    <label for="titre">titre</label>
+                                    <input type="text" class="form-control" name="titre" value="{{ old('titre') }}" id="titre" placeholder="Saisir titre de materiel">
+                                    @error('titre')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>

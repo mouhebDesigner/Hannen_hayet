@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\directeur;
 
 use App\Models\Materiel;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\MaterielRequest;
+
 
 class MaterielController extends Controller
 {
@@ -15,9 +17,9 @@ class MaterielController extends Controller
      */
     public function index()
     {
-        $materiels = Materiel::paginate(10);
+        $materiels = Materiel::paginate(5);
 
-        return view('materiels.index', compact('materiels'));
+        return view('directeur.materiels.index', compact('materiels'));
     }
 
     /**
@@ -27,7 +29,7 @@ class MaterielController extends Controller
      */
     public function create()
     {
-        return view('materiels.create');
+        return view('directeur.materiels.create');
     }
 
     /**
@@ -42,11 +44,11 @@ class MaterielController extends Controller
 
         $materiel->nom = $request->nom;
         $materiel->quantite = $request->quantite;
-        $materiel->categorie_id = $request->categorie_id;
+        $materiel->categorie = $request->categorie;
 
         $materiel->save();
 
-        return redirect('/materiels')->with('added', 'Le materiel a été ajouté avec succés');
+        return redirect('directeur/materiels')->with('added', 'Le materiel a été ajouté avec succés');
     }
 
     /**
@@ -70,7 +72,7 @@ class MaterielController extends Controller
     {
         $materiel = Materiel::find($id);
 
-        return view('materiels.edit', compact('categorie'));
+        return view('directeur.materiels.edit', compact('materiel'));
     }
 
     /**
@@ -86,10 +88,11 @@ class MaterielController extends Controller
 
         $materiel->nom = $request->nom;
         $materiel->quantite = $request->quantite;
-        $materiel->categorie_id = $request->categorie_id;
+        $materiel->categorie = $request->categorie;
+
         $materiel->save();
 
-        return redirect('materiels')->with('updated', 'Le matériel a été modifié avec succés');
+        return redirect('directeurdirecteur/materiels')->with('updated', 'Le matériel a été modifié avec succés');
     }
 
     /**
@@ -101,7 +104,8 @@ class MaterielController extends Controller
     public function destroy($id)
     {
         Materiel::find($id)->delete();
-        return redirect('materiels')->with('deleted', 'Le matériel a été supprimer avec succés');
+        return redirect('directeurdirecteur/materiels')->with('deleted', 'Le matériel a été supprimer avec succés');
         
     }
 }
+
