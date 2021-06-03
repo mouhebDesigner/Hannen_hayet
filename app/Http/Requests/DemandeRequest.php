@@ -27,7 +27,8 @@ class DemandeRequest extends FormRequest
             "date" => "required",
             "description" => "required",
             "quantite" => "required",
-            "materiel_id" => "required"
+            "materiel_id" => "required",
+            "categorie" => "required",
         ];
     }
 }

@@ -115,7 +115,7 @@ return [
     */
 
     'attributes'           => [
-        'section_id'            => "section",
+        'materiel_id'            => "materièl",
         'name'                  => 'nom',
         'username'              => 'nom d\'utilisateur',
         'email'                 => 'adresse e-mail',

@@ -21,7 +21,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="{{ url('demandes') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('chef/demandes') }}" method="post" enctype="multipart/form-data">
                         @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -89,9 +89,6 @@
             
             var categorie = $(this).val();
             $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
                 type:'get',
                 url:'/materiel_list/'+categorie,
                 data:'_token = <?php echo csrf_token() ?>',

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Chef;
 
+use Auth;
 use App\Models\Demande;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Auth;
+use App\Http\Requests\DemandeRequest;
+
 class DemandeController extends Controller
 {
      /**

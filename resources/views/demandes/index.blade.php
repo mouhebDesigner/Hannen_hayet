@@ -46,11 +46,13 @@
                                                         aria-controls="example1">
                                                     </label>
                                                 </div>
+                                                @if(Auth::user()->grade == "chef")
                                                 <a href="{{ url('chef/demandes/create') }}">
                                                     <button class="btn-delete">
                                                         <i class="fa fa-plus"></i>
                                                     </button>
                                                 </a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -82,9 +84,10 @@
                                                         <tr>
                                                             <td>{{ $demande->materiel->nom }}</td>
                                                             <td>{{ $demande->quantite }}</td>
-                                                            <td>{{ $demande->created_at }}</td>
-                                                            <td>{{ $demande->updated_at }}</td>
+                                                            <td>{{ $demande->created_at->diffForHumans() }}</td>
+                                                            <td>{{ $demande->updated_at->diffForHumans() }}</td>
                                                             <td>
+                                                                @if(Auth::user()->grade == "chef")
                                                                 <div class="d-flex justify-content-around">
                                                                     <form action="{{ url('chef/demandes/'.$demande->id) }}" method="post">
                                                                         @csrf
@@ -97,6 +100,30 @@
                                                                         <i class="fa fa-edit"></i>
                                                                     </a>
                                                                 </div>
+                                                                @else 
+                                                                <div class="d-flex justify-content-around">
+                                                                    @if($demande->etat == "accepter")
+                                                                        <button disabled class="btn btn-success" onclick="return confirm('Voules-vous accepter cette demande')">
+                                                                            Accepter <i class="fa fa-check"></i>
+                                                                        </button>
+
+                                                                    @else 
+
+                                                                        <a href="{{ url('directeur/demandes/'.$demande->id.'/accepter') }}" class="btn btn-success" onclick="return confirm('Voules-vous accepter cette demande')">
+                                                                            Accepter
+                                                                        </a>
+                                                                    @endif
+                                                                    @if($demande->etat == "refuser")
+                                                                        <button disabled class="btn btn-danger" onclick="return confirm('Voules-vous accepter cette demande')">
+                                                                            Réfuser <i class="fa fa-check"></i>
+                                                                        </button>
+                                                                    @else 
+                                                                        <a href="{{ url('directeur/demandes/'.$demande->id.'/refuser') }}" class="btn btn-danger" onclick="return confirm('Voules-vous refuser cette demande')">
+                                                                            Réfuser
+                                                                        </a>
+                                                                    @endif
+                                                                </div>
+                                                                @endif
                                                             </td>
                                                         </tr>
                                                     @endforeach

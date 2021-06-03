@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\directeur\ChefController;
 use App\Http\Controllers\chef\DemandeController;
 use App\Http\Controllers\chef\IncidentController as IncidentController_chef;
+use App\Http\Controllers\directeur\DemandeController as DemandeController_directeur;
 use App\Http\Controllers\directeur\IncidentController as IncidentController_directeur;
 use App\Http\Controllers\directeur\MaterielController;
 use App\Http\Controllers\directeur\CategorieController;
@@ -21,20 +22,24 @@ use App\Http\Controllers\directeur\CategorieController;
 */
 
 Route::prefix('directeur')->group(function () {
-
-    Route::get('/materiel_list/{categorie}', function($categorie){
-        $materiels = Materiel::where('categorie', $categorie)->get();
-        return response()->json($materiels);
-    });
+    Route::get('demandes/{demande_id}/accepter', [DemandeController_directeur::class, 'accepter']);
+    Route::get('demandes/{demande_id}/refuser', [DemandeController_directeur::class, 'refuser']);
     Route::resource('materiels', MaterielController::class);
     Route::resource('chefs', ChefController::class);
     Route::resource('incidents', IncidentController_directeur::class);
+    Route::resource('demandes', DemandeController_directeur::class);
 });
+
 Route::prefix('chef')->group(function () {
     Route::resource('demandes', DemandeController::class);
     Route::resource('incidents', IncidentController_chef::class);
-});
+    Route::resource('materiels', MaterielController::class);
 
+});
+Route::get('/materiel_list/{categorie}', function($categorie){
+    $materiels = Materiel::where('categorie', $categorie)->get();
+    return response()->json($materiels);
+});
 
 Route::get('/', function () {
     return view('auth.login');

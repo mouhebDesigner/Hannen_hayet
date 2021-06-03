@@ -71,29 +71,47 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ url('directeur/demandes') }}" class="nav-link @if(Request::is('directeur/demandes*')) active @endif">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                {{ __('Traiter les demandes') }}
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+          </li>
         @endif
 
-          @if(Auth::user()->isChef())
-            <li class="nav-item">
-              <a href="{{ url('chef/demandes') }}" class="nav-link @if(Request::is('chef/demandes*')) active @endif">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>
-                  Gérer les demandes
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url('chef/incidents') }}" class="nav-link @if(Request::is('chef/incidents*')) active @endif">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>
-                  Gérer les incidents
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-            </li>
-           
-          @endif
+        @if(Auth::user()->isChef())
+          <li class="nav-item">
+            <a href="{{ url('chef/demandes') }}" class="nav-link @if(Request::is('chef/demandes*')) active @endif">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Gérer les demandes
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('chef/incidents') }}" class="nav-link @if(Request::is('chef/incidents*')) active @endif">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Gérer les incidents
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('chef/materiels') }}" class="nav-link @if(Request::is('chef/materiels*')) active @endif">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Gérer les fournitures
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+          </li>
+          
+        @endif
         </ul>
 
       </nav>

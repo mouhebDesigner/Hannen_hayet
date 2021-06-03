@@ -8,7 +8,7 @@
         <div class="content-wrapper">
             <section class="content-header">
                 <h1>
-                    Ajouter une demande 
+                    Modifier une demande 
                 </h1>
             </section>
             <section class="content">
@@ -17,7 +17,7 @@
                 
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Formulaire d'ajout</h3>
+                            <h3 class="card-title">Formulaire de modification</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -27,17 +27,19 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="categorie_id">Categorie</label>
-                                    <select name="categorie_id" id="categorie_id" class="form-control">
+                                    <select name="categorie" id="categorie" class="form-control">
                                         <option value="" selected disbaled>Choisir catégorie</option>
-                                        @foreach(App\Models\Categorie::all() as $categorie)
-                                            <option value="{{ $categorie->id }}">{{ $categorie->nom }}</option>
-                                        @endforeach
+                                        <option value="papier" @if($demande->materiel->categorie =="papier") selected @endif>Papier</option>
+                                        <option value="materiel" @if($demande->materiel->categorie =="materiel") selected @endif>Matériel</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="materiel_id">Materiel</label>
                                     <select name="materiel_id" id="materiel_id" class="form-control">
                                         <option value="" selected disbaled>Choisir materiel</option>
+                                        @foreach(App\Models\Materiel::where('categorie', $demande->materiel->categorie)->get(['id', 'nom']) as $materiel)
+                                            <option value="{{ $materiel->id }}">{{ $materiel->nom }}</option>
+                                        @endforeach
                                     </select>
                                     @error('materiel_id')
                                         <p class="text-danger">{{ $message }}</p>
@@ -84,14 +86,14 @@
 @endsection
 @section('script')
     <script>
-        $("#categorie_id").on('change', function(){
-            var categorie_id = $(this).val();
+        $("#categorie").on('change', function(){
+            var categorie = $(this).val();
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type:'get',
-                url:'/materiel_list/'+categorie_id,
+                url:'/materiel_list/'+categorie,
                 data:'_token = <?php echo csrf_token() ?>',
                 success:function(data) {
                     console.log("test");

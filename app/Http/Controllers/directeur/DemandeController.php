@@ -6,6 +6,8 @@ use Auth;
 use App\Models\Demande;
 use Illuminate\Http\Request;
 use App\Http\Requests\DemandeRequest;
+use App\Http\Controllers\Controller;
+
 
 class DemandeController extends Controller
 {
@@ -16,7 +18,7 @@ class DemandeController extends Controller
      */
     public function index()
     {
-        $demandes = Demande::where('user_id', Auth::user()->id)->paginate(10);
+        $demandes = Demande::paginate(10);
 
         return view('demandes.index', compact('demandes'));
     }
@@ -108,5 +110,24 @@ class DemandeController extends Controller
         Demande::find($id)->delete();
         return redirect('demandes')->with('deleted', 'La demande a été supprimer avec succés');
         
+    }
+
+    public function accepter($demande_id)   {
+        $demande = Demande::find($demande_id);
+
+        $demande->etat = "accepter";
+
+        $demande->save();
+
+        return redirect()->back()->with('success', 'La demande a été accepté avec succée');
+    }
+    public function refuser($demande_id)   {
+        $demande = Demande::find($demande_id);
+
+        $demande->etat = "refuser";
+
+        $demande->save();
+
+        return redirect()->back()->with('success', 'La demande a été refusé avec succée');
     }
 }
