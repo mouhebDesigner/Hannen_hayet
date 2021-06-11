@@ -112,6 +112,17 @@
           </li>
           
         @endif
+        @if(Auth::user()->isResponsable())
+          <li class="nav-item">
+            <a href="{{ url('responsable/demandes') }}" class="nav-link @if(Request::is('responsable/demandes*')) active @endif">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                {{ __('Traiter les demandes') }}
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+          </li>
+        @endif
         </ul>
 
       </nav>

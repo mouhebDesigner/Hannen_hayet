@@ -14,7 +14,11 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Liste de demandes</h1>
+                            <h1 class="m-0">Liste de demandes 
+                                @if(Auth::user()->isResponsable())
+                                    à traiter
+                                @endif
+                            </h1>
                         </div><!-- /.col -->
                        
                     </div>
@@ -87,7 +91,7 @@
                                                             <td>{{ $demande->created_at->diffForHumans() }}</td>
                                                             <td>{{ $demande->updated_at->diffForHumans() }}</td>
                                                             <td>
-                                                                @if(Auth::user()->grade == "chef")
+                                                                @if(Auth::user()->isChef())
                                                                 <div class="d-flex justify-content-around">
                                                                     <form action="{{ url('chef/demandes/'.$demande->id) }}" method="post">
                                                                         @csrf
@@ -100,29 +104,65 @@
                                                                         <i class="fa fa-edit"></i>
                                                                     </a>
                                                                 </div>
+                                                                @elseif(Auth::user()->isAdmin()) 
+                                                                    @if($demande->materiel->quantite > $demande->quantite)
+                                                                        <div class="d-flex justify-content-around">
+                                                                            @if($demande->etat == "accepter")
+                                                                                <button disabled class="btn btn-success" onclick="return confirm('Voules-vous accepter cette demande')">
+                                                                                    Accepter <i class="fa fa-check"></i>
+                                                                                </button>
+
+                                                                            @else 
+
+                                                                                <a href="{{ url('directeur/demandes/'.$demande->id.'/accepter') }}" class="btn btn-success" onclick="return confirm('Voules-vous accepter cette demande')">
+                                                                                    Accepter
+                                                                                </a>
+                                                                            @endif
+                                                                            @if($demande->etat == "refuser")
+                                                                                <button disabled class="btn btn-danger" onclick="return confirm('Voules-vous accepter cette demande')">
+                                                                                    Réfuser <i class="fa fa-check"></i>
+                                                                                </button>
+                                                                            @else 
+                                                                                <a href="{{ url('directeur/demandes/'.$demande->id.'/refuser') }}" class="btn btn-danger" onclick="return confirm('Voules-vous refuser cette demande')">
+                                                                                    Réfuser
+                                                                                </a>
+                                                                            @endif
+                                                                        </div>
+                                                                    @else 
+                                                                        @if($demande->transferer == NULL)
+                                                                            <a href="{{ url('directeur/demandes/'.$demande->id.'/transferer') }}" class="btn btn-success" onclick="return confirm('Voules-vous accepter cette demande')">
+                                                                                Transférer au responsable
+                                                                            </a>
+                                                                        @else 
+                                                                            <button disabled class="btn btn-success" onclick="return confirm('Voules-vous accepter cette demande')">
+                                                                                Transféré <i class="fa fa-check"></i>
+                                                                            </button>
+                                                                        @endif
+
+                                                                    @endif
                                                                 @else 
-                                                                <div class="d-flex justify-content-around">
-                                                                    @if($demande->etat == "accepter")
-                                                                        <button disabled class="btn btn-success" onclick="return confirm('Voules-vous accepter cette demande')">
-                                                                            Accepter <i class="fa fa-check"></i>
-                                                                        </button>
+                                                                    <div class="d-flex justify-content-around">
+                                                                        @if($demande->etat == "accepter")
+                                                                            <button disabled class="btn btn-success" onclick="return confirm('Voules-vous accepter cette demande')">
+                                                                                Accepter <i class="fa fa-check"></i>
+                                                                            </button>
 
-                                                                    @else 
+                                                                        @else 
 
-                                                                        <a href="{{ url('directeur/demandes/'.$demande->id.'/accepter') }}" class="btn btn-success" onclick="return confirm('Voules-vous accepter cette demande')">
-                                                                            Accepter
-                                                                        </a>
-                                                                    @endif
-                                                                    @if($demande->etat == "refuser")
-                                                                        <button disabled class="btn btn-danger" onclick="return confirm('Voules-vous accepter cette demande')">
-                                                                            Réfuser <i class="fa fa-check"></i>
-                                                                        </button>
-                                                                    @else 
-                                                                        <a href="{{ url('directeur/demandes/'.$demande->id.'/refuser') }}" class="btn btn-danger" onclick="return confirm('Voules-vous refuser cette demande')">
-                                                                            Réfuser
-                                                                        </a>
-                                                                    @endif
-                                                                </div>
+                                                                            <a href="{{ url('directeur/demandes/'.$demande->id.'/accepter') }}" class="btn btn-success" onclick="return confirm('Voules-vous accepter cette demande')">
+                                                                                Accepter
+                                                                            </a>
+                                                                        @endif
+                                                                        @if($demande->etat == "refuser")
+                                                                            <button disabled class="btn btn-danger" onclick="return confirm('Voules-vous accepter cette demande')">
+                                                                                Réfuser <i class="fa fa-check"></i>
+                                                                            </button>
+                                                                        @else 
+                                                                            <a href="{{ url('directeur/demandes/'.$demande->id.'/refuser') }}" class="btn btn-danger" onclick="return confirm('Voules-vous refuser cette demande')">
+                                                                                Réfuser
+                                                                            </a>
+                                                                        @endif
+                                                                    </div>
                                                                 @endif
                                                             </td>
                                                         </tr>

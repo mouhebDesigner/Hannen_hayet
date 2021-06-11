@@ -18,6 +18,7 @@ class CreateDemandesTable extends Migration
             $table->date('date');
             $table->text('description');
             $table->biginteger('quantite');
+            $table->boolean('transferer')->default(NULL);
             $table->enum('etat', ['accepter', 'refuser'])->nullable()->default(NULL);
             $table->foreignId('materiel_id')->constrained('materiels')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');

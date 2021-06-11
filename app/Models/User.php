@@ -49,6 +49,13 @@ class User extends Authenticatable
         return Auth::user()->grade == "chef";
     }
 
+  
+
+
+    public function isResponsable(){
+        return Auth::user()->grade == "responsable";
+    }
+
     public function demandes(){
         return $this->hasMany(Demande::class);
     }

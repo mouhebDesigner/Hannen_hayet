@@ -130,4 +130,14 @@ class DemandeController extends Controller
 
         return redirect()->back()->with('success', 'La demande a été refusé avec succée');
     }
+    public function transferer($demande_id)   {
+
+        $demande = Demande::find($demande_id);
+
+        $demande->transferer = 1;
+
+        $demande->save();
+
+        return redirect()->back()->with('success', 'La demande a été transféré  avec succée');
+    }
 }
