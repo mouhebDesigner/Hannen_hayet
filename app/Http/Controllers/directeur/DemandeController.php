@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\directeur;
 
 use Auth;
+use App\Models\User;
 use App\Models\Demande;
 use Illuminate\Http\Request;
-use App\Http\Requests\DemandeRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DemandeRequest;
+use App\Notifications\RequestAccepted;
 
 
 class DemandeController extends Controller
@@ -113,11 +115,15 @@ class DemandeController extends Controller
     }
 
     public function accepter($demande_id)   {
+        
         $demande = Demande::find($demande_id);
 
         $demande->etat = "accepter";
 
         $demande->save();
+
+        User::find($demande->user_id)->notify(new RequestAccepted($demande));
+
 
         return redirect()->back()->with('success', 'La demande a été accepté avec succée');
     }

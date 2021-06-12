@@ -8,7 +8,7 @@
         <div class="content-wrapper">
             <section class="content-header">
                 <h1>
-                    Déclarer un incident 
+                    Modifier un incident 
                 </h1>
             </section>
             <section class="content">
@@ -21,13 +21,14 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="{{ url('chef/incidents') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('directeur/incidents/'.$incident->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
+                        @method('put')
                             <div class="card-body">
                                 
                                 <div class="form-group">
                                     <label for="titre">titre</label>
-                                    <input type="text" class="form-control" name="titre" value="{{ old('titre') }}" id="titre" placeholder="Saisir titre de materiel">
+                                    <input type="text" class="form-control" name="titre" value="{{ $incident->titre }}" id="titre" placeholder="Saisir titre de materiel">
                                     @error('titre')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -36,9 +37,9 @@
                                     <label for="domaine">Domaine</label>
                                     <select name="domaine" id="domaine" class="form-control">
                                         <option value="" selected disbaled>Choisir domaine</option>
-                                        <option value="informatique">Informatique</option>
-                                        <option value="software">Software</option>
-                                        <option value="hardware">Hardware</option>
+                                        <option value="informatique" @if($incident->domaine == "informatique") selected @endif>Informatique</option>
+                                        <option value="software" @if($incident->domaine == "software") selected @endif>Software</option>
+                                        <option value="hardware" @if($incident->domaine == "hardware") selected @endif>Hardware</option>
                                     </select>
                                     @error('domaine')
                                         <p class="text-danger">{{ $message }}</p>
@@ -46,7 +47,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <textarea name="description" class="form-control" id="description" cols="30" rows="5" placeholder="Saisir la description">{{ old('description') }}</textarea>
+                                    <textarea name="description" class="form-control" id="description" cols="30" rows="5" placeholder="Saisir la description">{{ $incident->description }}</textarea>
                                     @error('description')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror

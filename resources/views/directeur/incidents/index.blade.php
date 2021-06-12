@@ -38,15 +38,9 @@
                                         <div class="col-md-12">
                                             <div class="d-flex justify-content-between">
                                                 <div id="example1_filter" class="dataTables_filter">
-                                                    <label>
-                                                        Search:
-                                                        <input 
-                                                        type="search" class="form-control form-control-sm" 
-                                                        placeholder="" 
-                                                        aria-controls="example1">
-                                                    </label>
+                                                   
                                                 </div>
-                                                <a href="{{ url('chef/incidents/create') }}">
+                                                <a href="{{ url('directeur/incidents/create') }}">
                                                     <button class="btn-delete">
                                                         <i class="fa fa-plus"></i>
                                                     </button>
@@ -81,9 +75,18 @@
                                                             <td>{{ $incident->created_at->diffForHumans() }}</td>
                                                             <td>{{ $incident->updated_at->diffForHumans() }}</td>
                                                             <td>
-                                                               <a href="{{ url('directeur/techniciens') }}" class="btn btn-primary">
-                                                                Affecter technicien
-                                                               </a>
+                                                                <div class="d-flex justify-content-around">
+                                                                    <form action="{{ url('directeur/incidents/'.$incident->id) }}" method="post">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <button type="submit" class="btn-delete" onclick="return confirm('Voules-vous supprimer cette demande')">
+                                                                            <i class="fa fa-trash"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                    <a href="{{ url('directeur/incidents/'.$incident->id.'/edit') }}" onclick="return confirm('Voules-vous modifier cette demande')">
+                                                                        <i class="fa fa-edit"></i>
+                                                                    </a>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     @endforeach

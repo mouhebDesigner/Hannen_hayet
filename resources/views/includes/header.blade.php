@@ -32,11 +32,24 @@
           
           
           
-          
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
+          @foreach (Auth::user()->unreadNotifications as $notification) 
+          @if(Auth::user()->isAdmin())
+            <a href="{{ url('directeur/demandes') }}" class="dropdown-item">
+              <i class="fas fa-file mr-2"></i> 
+              {{  App\Models\Demande::find($notification->data['id'])->materiel->nom }}
+
+              <span class="float-right text-muted text-sm">{{ $notification->created_at->diffForHumans() }}</span>
+            </a>
+            @else 
+            <a href="{{ url('chef/demandes') }}" class="dropdown-item">
+              <i class="fas fa-file mr-2"></i> 
+              {{  App\Models\Demande::find($notification->data['id'])->materiel->nom }} accepté
+
+              <span class="float-right text-muted text-sm">{{ $notification->created_at->diffForHumans() }}</span>
+            </a>
+
+            @endif
+          @endforeach
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\directeur;
 
+use Auth;
+use App\Models\User;
 use App\Models\Incident;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IncidentRequest;
-use Auth;
+
 class IncidentController extends Controller
 {
      /**
@@ -16,23 +18,11 @@ class IncidentController extends Controller
      */
     public function index()
     {
-        $incidents = Incident::paginate(10);
+        $incidents = Incident::where('user_id', Auth::user()->id)->paginate(10);
 
         return view('directeur.incidents.index', compact('incidents'));
     }
 
-    public function affecter($incident_id){
-        $incident = Incident::find($incident_id);
-
-        $incident->technicien_id = $request->technicien_id;
-
-        $incident->save();
-
-        
-        return redirect('directeur/incidents')->with('affected', 'Technicien a bien été affecté');
-
-
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -51,15 +41,19 @@ class IncidentController extends Controller
      */
     public function store(IncidentRequest $request)
     {
+
+        $technicien_id = User::where('grade', 'technicien')->where('specialite', $request->domaine)
+        ->where('disponible', 'oui')->first()->id;
+
         $incident = new Incident();
 
         $incident->titre = $request->titre;
         $incident->description = $request->description;
+        $incident->domaine = $request->domaine;
         $incident->user_id = Auth::user()->id;
+        $incident->technicien_id = $technicien_id;
 
         $incident->save();
-
-        
 
         return redirect('directeur/incidents')->with('added', 'L\'incident a été ajouté avec succés');
     }
@@ -95,17 +89,13 @@ class IncidentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(IncidentRequest $request, $id)
     {
-
-        $incident = Incident::find($id);
-
-        $incident->titre = $request->titre;
+        $incident =  Incident::find($id);
         $incident->description = $request->description;
+        $incident->titre = $request->titre;
 
         $incident->save();
-
-            
 
         return redirect('directeur/incidents')->with('updated', 'L\'incident a été modifié avec succés');
     }

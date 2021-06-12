@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Chef;
 
 use Auth;
+use App\Models\User;
 use App\Models\Incident;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -41,7 +42,9 @@ class IncidentController extends Controller
     public function store(IncidentRequest $request)
     {
 
-        $technicien_id = User::where('grade', 'technicien')->where('specialite', $request->domaine)->first()->id;
+        $technicien_id = User::where('grade', 'technicien')->where('specialite', $request->domaine)
+        ->where('disponible', 'oui')->first()->id;
+
         $incident = new Incident();
 
         $incident->titre = $request->titre;

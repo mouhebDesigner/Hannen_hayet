@@ -25,7 +25,8 @@ class IncidentRequest extends FormRequest
     {
         return [
             "titre" => "required",
-            "description" => "required"
+            "description" => "required",
+            "domaine" => "required"
         ];
     }
 }
