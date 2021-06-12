@@ -42,13 +42,7 @@
                                         <div class="col-md-12">
                                             <div class="d-flex justify-content-between">
                                                 <div id="example1_filter" class="dataTables_filter">
-                                                    <label>
-                                                        Search:
-                                                        <input 
-                                                        type="search" class="form-control form-control-sm" 
-                                                        placeholder="" 
-                                                        aria-controls="example1">
-                                                    </label>
+                                                
                                                 </div>
                                                 @if(Auth::user()->grade == "chef" )
                                                 <a href="{{ url('chef/demandes/create') }}">
@@ -100,14 +94,14 @@
                                                             <td>
                                                                 @if(Auth::user()->isChef() || Auth::user()->isEmploye())
                                                                 <div class="d-flex justify-content-around">
-                                                                    <form action="{{ url('chef/demandes/'.$demande->id) }}" method="post">
+                                                                    <form action="{{ url('employe/demandes/'.$demande->id) }}" method="post">
                                                                         @csrf
                                                                         @method('delete')
                                                                         <button type="submit" class="btn-delete" onclick="return confirm('Voules-vous supprimer cette demande')">
                                                                             <i class="fa fa-trash"></i>
                                                                         </button>
                                                                     </form>
-                                                                    <a href="{{ url('chef/demandes/'.$demande->id.'/edit') }}" onclick="return confirm('Voules-vous modifier cette demande')">
+                                                                    <a href="{{ url('employe/demandes/'.$demande->id.'/edit') }}" onclick="return confirm('Voules-vous modifier cette demande')">
                                                                         <i class="fa fa-edit"></i>
                                                                     </a>
                                                                 </div>

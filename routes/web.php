@@ -3,7 +3,9 @@
 use App\Models\Materiel;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\chef\DemandeController;
+use App\Http\Controllers\employe\DemandeController as DemandeController_employe;
 use App\Http\Controllers\directeur\ChefController;
+use App\Http\Controllers\directeur\EmployeController;
 use App\Http\Controllers\directeur\MaterielController;
 use App\Http\Controllers\directeur\CategorieController;
 use App\Http\Controllers\directeur\TechnicienController;
@@ -49,11 +51,19 @@ Route::prefix('directeur')->group(function () {
 });
 
 Route::prefix('chef')->group(function () {
-    Route::resource('demandes', DemandeController::class);
+    Route::resource('employes', EmployeController::class);
+
+    Route::resource('demandes', DemandeController_employe::class);
     Route::resource('incidents', IncidentController_chef::class);
     Route::resource('materiels', MaterielController::class);
 
 });
+
+Route::prefix('employe')->group(function () {
+    Route::resource('demandes', DemandeController_employe::class);
+    Route::resource('materiels', MaterielController::class);
+});
+
 Route::get('/materiel_list/{categorie}', function($categorie){
     $materiels = Materiel::where('categorie', $categorie)->get();
     return response()->json($materiels);

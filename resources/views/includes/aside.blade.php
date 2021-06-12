@@ -32,7 +32,7 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-      @if(Auth::user()->isAdmin())
+        @if(Auth::user()->isAdmin())
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
@@ -111,7 +111,38 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ url('chef/employes') }}" class="nav-link @if(Request::is('chef/employes*')) active @endif">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                {{ __('Gérer les employés') }}
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ url('chef/materiels') }}" class="nav-link @if(Request::is('chef/materiels*')) active @endif">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Gérer les fournitures
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+          </li>
+          
+        @endif
+        @if(Auth::user()->isEmploye())
+          <li class="nav-item">
+            <a href="{{ url('employe/demandes') }}" class="nav-link @if(Request::is('employe/demandes*')) active @endif">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Gérer les demandes
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+          </li>
+         
+          <li class="nav-item">
+            <a href="{{ url('employe/materiels') }}" class="nav-link @if(Request::is('employe/materiels*')) active @endif">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Gérer les fournitures
