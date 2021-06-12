@@ -26,7 +26,7 @@
                             <div class="card-body" id="inputs">
                                 <div class="form-group">
                                     <label for="name">Nom de chef</label>
-                                    <input type="text" class="form-control" name="name" value="{{ old('name') }}" id="name" placeholder="Saisir name de matiére">
+                                    <input type="text" class="form-control" name="name" value="{{ old('name') }}" id="name" placeholder="Saisir name de chef">
                                     @error('name')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -34,28 +34,28 @@
                               
                                 <div class="form-group">
                                     <label for="email">Email de chef</label>
-                                    <input type="text" class="form-control" name="email" value="{{ old('email') }}" id="email" placeholder="Saisir email de matiére">
+                                    <input type="text" class="form-control" name="email" value="{{ old('email') }}" id="email" placeholder="Saisir email de chef">
                                     @error('email')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Mot de passe  de chef</label>
-                                    <input type="password" class="form-control" name="password" value="{{ old('password') }}" id="password" placeholder="Saisir password de matiére">
+                                    <input type="password" class="form-control" name="password" value="{{ old('password') }}" id="password" placeholder="Saisir password de chef">
                                     @error('password')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Confirmer la Mot de passe</label>
-                                    <input type="password" class="form-control" name="password_confirmation" value="{{ old('password') }}" id="password" placeholder="Saisir password de matiére">
+                                    <input type="password" class="form-control" name="password_confirmation" value="{{ old('password') }}" id="password" placeholder="Saisir password de chef">
                                     @error('password')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="numtel">Numéro de téléphone de chef</label>
-                                    <input type="number" class="form-control" name="numtel" value="{{ old('numtel') }}" id="numtel" placeholder="Saisir numtel de matiére">
+                                    <input type="number" class="form-control" name="numtel" value="{{ old('numtel') }}" id="numtel" placeholder="Saisir numéro de téléphone de chef">
                                     @error('numtel')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror

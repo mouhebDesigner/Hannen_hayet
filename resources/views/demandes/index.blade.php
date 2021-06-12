@@ -130,7 +130,7 @@
                                                                         </div>
                                                                     @else 
                                                                         @if($demande->transferer == NULL)
-                                                                            <a href="{{ url('directeur/demandes/'.$demande->id.'/transferer') }}" class="btn btn-success" onclick="return confirm('Voules-vous accepter cette demande')">
+                                                                            <a href="{{ url('directeur/demandes/'.$demande->id.'/transferer') }}" class="btn btn-success" onclick="return confirm('Voules-vous transférer cette demande')">
                                                                                 Transférer au responsable
                                                                             </a>
                                                                         @else 

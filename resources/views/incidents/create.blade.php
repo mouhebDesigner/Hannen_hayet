@@ -33,6 +33,18 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="sepcialite">Domaine</label>
+                                    <select name="sepcialite" id="sepcialite" class="form-control">
+                                        <option value="" selected disbaled>Choisir domaine</option>
+                                        <option value="informatique">Informatique</option>
+                                        <option value="software">Software</option>
+                                        <option value="hardware">Hardware</option>
+                                    </select>
+                                    @error('sepcialite')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="description">Description</label>
                                     <textarea name="description" class="form-control" id="description" cols="30" rows="5" placeholder="Saisir la description">{{ old('description') }}</textarea>
                                     @error('description')

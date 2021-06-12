@@ -4,11 +4,12 @@ namespace App\Http\Controllers\directeur;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\ChefRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\ChefRequest;
+use App\Http\Requests\TechnicienRequest;
 
-class ChefController extends Controller
+class TechnicienController extends Controller
 {
      /**
      * Display a listing of the resource.
@@ -16,15 +17,15 @@ class ChefController extends Controller
      * @return \Illuminate\Http\Response
      */
     /**
-     * afficher la liste de chef directeur/chefs
+     * afficher la liste de chef directeur/techniciens
      * 
      */
      
     public function index()
     {
-        $chefs = User::where('grade', 'chef')->orderBy('created_at', 'desc')->paginate(10);
+        $techniciens = User::where('grade', 'technicien')->orderBy('created_at', 'desc')->paginate(10);
 
-        return view('directeur.chefs.index', compact('chefs'));
+        return view('directeur.techniciens.index', compact('techniciens'));
     }
 
     /**
@@ -34,13 +35,13 @@ class ChefController extends Controller
      */
 
     /**
-     * La fonction de path directeur/chefs/create
+     * La fonction de path directeur/techniciens/create
      * La formulaire d'ajout chef
      */
     
     public function create()
     {
-        return view('directeur.chefs.create');
+        return view('directeur.techniciens.create');
     }
 
     /**
@@ -52,22 +53,22 @@ class ChefController extends Controller
     /**
      * Ajouter un chef à la base de donnés
      */
-    // La fonction de path directeur/chefs
-    public function store(ChefRequest $request)
+    // La fonction de path directeur/techniciens
+    public function store(TechnicienRequest $request)
     {
-        $chef = new User();
-        $chef->name = $request->name;
-        $chef->email = $request->email;
-        $chef->password = Hash::make($request->password);
-        $chef->numtel = $request->numtel;
-        $chef->grade = "chef";
-    //   $2y$10$.BnC5RqmfLsxdPSqm8za7eQuMlpDG85C.1ECV3okG32a6ZpAoxTvW
-
-        $chef->save();
+        $technicien = new User();
+        $technicien->name = $request->name;
+        $technicien->email = $request->email;
+        $technicien->password = Hash::make($request->password);
+        $technicien->numtel = $request->numtel;
+        $technicien->specialite = $request->specialite;
+        $technicien->grade = "technicien";
+        
+        $technicien->save();
 
         
 
-        return redirect('directeur/chefs')->with('added', 'Le chef a été ajouté avec succés');
+        return redirect('directeur/techniciens')->with('added', 'Le technicien a été ajouté avec succés');
     }
 
     /**
@@ -86,14 +87,14 @@ class ChefController extends Controller
      */
     /**
      * Afficher la formulaire d'edition de chef
-     * directeur/chefs/{id}/edit
+     * directeur/techniciens/{id}/edit
      * method get 
      */
     public function edit($id)
     {
-        $chef = User::find($id);
+        $technicien = User::find($id);
 
-        return view('directeur.chefs.edit', compact('chef'));
+        return view('directeur.techniciens.edit', compact('technicien'));
     }
 
     /**
@@ -106,7 +107,7 @@ class ChefController extends Controller
     /**
      * 
      * mise à jour de chef 
-     * directeur/chefs/{id} 
+     * directeur/techniciens/{id} 
      * method put 
      */
     public function update(Request $request, $id)
@@ -123,18 +124,20 @@ class ChefController extends Controller
             'name' => 'required | string | max:255',
         ]);
 
-        $chef =  User::find($id);
+        $technicien =  User::find($id);
 
-        $chef->name = $request->name;
-        $chef->email = $request->email;
-        $chef->password = Hash::make($request->password);
-        $chef->numtel = $request->numtel;
+        $technicien->name = $request->name;
+        $technicien->email = $request->email;
+        $technicien->password = Hash::make($request->password);
+        $technicien->numtel = $request->numtel;
+        $technicien->specialite = $request->specialite;
 
-        $chef->save();
+
+        $technicien->save();
 
             
 
-        return redirect('directeur/chefs')->with('updated', 'Le chef a été modifié avec succés');
+        return redirect('directeur/techniciens')->with('updated', 'Le technicien a été modifié avec succés');
     }
 
     /**
@@ -146,14 +149,14 @@ class ChefController extends Controller
 
     /**
      * Supprimer un chef 
-     * directeur/chefs/{id}
+     * directeur/techniciens/{id}
      * method delete 
      * 
      */
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect('directeur/chefs')->with('deleted', 'Le chef a été supprimer avec succés');
+        return redirect('directeur/techniciens')->with('deleted', 'Le technicien a été supprimer avec succés');
         
     }
 }

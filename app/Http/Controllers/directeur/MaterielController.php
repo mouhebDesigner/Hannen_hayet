@@ -17,7 +17,7 @@ class MaterielController extends Controller
      */
     public function index()
     {
-        $materiels = Materiel::paginate(5);
+        $materiels = Materiel::paginate(10);
 
         return view('directeur.materiels.index', compact('materiels'));
     }
@@ -92,7 +92,7 @@ class MaterielController extends Controller
 
         $materiel->save();
 
-        return redirect('directeurdirecteur/materiels')->with('updated', 'Le matériel a été modifié avec succés');
+        return redirect('directeur/materiels')->with('updated', 'Le fourniture a été modifié avec succés');
     }
 
     /**
@@ -104,7 +104,7 @@ class MaterielController extends Controller
     public function destroy($id)
     {
         Materiel::find($id)->delete();
-        return redirect('directeurdirecteur/materiels')->with('deleted', 'Le matériel a été supprimer avec succés');
+        return redirect('directeur/materiels')->with('deleted', 'Le fourniture a été supprimer avec succés');
         
     }
 }

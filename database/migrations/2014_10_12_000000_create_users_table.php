@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->biginteger('numtel')->unique();
             $table->enum('grade', ['responsable', 'chef', 'directeur', 'technicien', 'employe']);
+            $table->enum('disponible', ['oui', 'non']);
+            $table->enum('specialite', ['informatique', 'software', 'hardware'])->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

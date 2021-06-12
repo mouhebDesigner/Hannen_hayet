@@ -22,7 +22,9 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
           <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
+          <span class="badge badge-warning navbar-badge">
+            {{ Auth::user()->unreadNotifications->count() }}
+          </span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
           <span class="dropdown-item dropdown-header">15 Notifications</span>

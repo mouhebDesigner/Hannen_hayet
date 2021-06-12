@@ -10,7 +10,9 @@ use Auth;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
-
+    public static function user(){
+           
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -48,6 +50,8 @@ class User extends Authenticatable
     public function isChef(){
         return Auth::user()->grade == "chef";
     }
+
+
 
   
 

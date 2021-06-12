@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use DB;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -54,6 +56,25 @@ class DatabaseSeeder extends Seeder
                 "nom" => "",
                 "quantite" => rand(10, 60),
                 "categorie" => "papier"
+            ],
+
+        ]);
+
+        DB::table('users')->insert([
+            [
+                "name" => "directeur",
+                "email" => "directeur@gmail.com",
+                "password" => Hash::make('adminadmin'),
+                "numtel" => "22000111",
+                "grade" => "directeur"
+            ],
+            
+            [
+                "name" => "responsable",
+                "email" => "responsable@gmail.com",
+                "password" => Hash::make('adminadmin'),
+                "numtel" => "22000112",
+                "grade" => "responsable"
             ],
 
         ]);

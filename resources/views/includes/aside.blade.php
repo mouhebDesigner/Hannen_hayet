@@ -63,6 +63,15 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ url('directeur/techniciens') }}" class="nav-link @if(Request::is('directeur/techniciens*')) active @endif">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                {{ __('Gérer les techniciens') }}
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ url('directeur/incidents') }}" class="nav-link @if(Request::is('directeur/incidents*')) active @endif">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>

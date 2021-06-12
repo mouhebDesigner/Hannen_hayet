@@ -117,6 +117,7 @@ return [
     'attributes'           => [
         'materiel_id'            => "materièl",
         'name'                  => 'nom',
+        'numtel'                  => 'numéro de téléphone',
         'username'              => 'nom d\'utilisateur',
         'email'                 => 'adresse e-mail',
         'first_name'            => 'prénom',
@@ -124,7 +125,7 @@ return [
         'password'              => 'mot de passe',
         'password_confirmation' => 'confirmation du mot de passe',
         'city'                  => 'ville',
-        'country'               => 'pays',
+        'country'               => 'pays', 
         'address'               => 'adresse',
         'phone'                 => 'téléphone',
         'mobile'                => 'portable',

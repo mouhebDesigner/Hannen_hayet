@@ -8,7 +8,7 @@
         <div class="content-wrapper">
             <section class="content-header">
                 <h1>
-                    Modifier un chef 
+                    Ajouter un technicien 
                 </h1>
             </section>
             <section class="content">
@@ -21,42 +21,53 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="{{ url('directeur/chefs/'.$chef->id) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('directeur/techniciens') }}" method="post" enctype="multipart/form-data">
                             @csrf
-                            @method('put')
                             <div class="card-body" id="inputs">
                                 <div class="form-group">
-                                    <label for="name">Nom de chef</label>
-                                    <input type="text" class="form-control" name="name" value="{{ $chef->name }}" id="name" placeholder="Saisir name de chef">
+                                    <label for="name">Nom de technicien</label>
+                                    <input type="text" class="form-control" name="name" value="{{ old('name') }}" id="name" placeholder="Saisir nom de technicien">
                                     @error('name')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="specialite">Spécialité de technicien</label>
+                                    <select name="specialite" id="specialite" class="form-control">
+                                        <option value="" selected disbaled>Choisir spécialité</option>
+                                        <option value="informatique">Informatique</option>
+                                        <option value="software">Software</option>
+                                        <option value="hardware">Hardware</option>
+                                    </select>
+                                    @error('specialite')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                               
                                 <div class="form-group">
-                                    <label for="email">Email de chef</label>
-                                    <input type="text" class="form-control" name="email" value="{{ $chef->email }}" id="email" placeholder="Saisir email de chef">
+                                    <label for="email">Email de technicien</label>
+                                    <input type="text" class="form-control" name="email" value="{{ old('email') }}" id="email" placeholder="Saisir email de technicien">
                                     @error('email')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">Mot de passe  de chef</label>
-                                    <input type="password" class="form-control" name="password"  id="password" placeholder="Saisir password de chef">
+                                    <label for="password">Mot de passe  de technicien</label>
+                                    <input type="password" class="form-control" name="password" value="{{ old('password') }}" id="password" placeholder="Saisir mot de passe de technicien">
                                     @error('password')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Confirmer la Mot de passe</label>
-                                    <input type="password" class="form-control" name="password_confirmation"  id="password" placeholder="Saisir password de chef">
+                                    <input type="password" class="form-control" name="password_confirmation" value="{{ old('password') }}" id="password" placeholder="Saisir mot de passe de technicien">
                                     @error('password')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="numtel">Numéro de téléphone de chef</label>
-                                    <input type="number" class="form-control" name="numtel" value="{{ $chef->numtel }}" id="numtel" placeholder="Saisir numtel de chef">
+                                    <label for="numtel">Numéro de téléphone de technicien</label>
+                                    <input type="number" class="form-control" name="numtel" value="{{ old('numtel') }}" id="numtel" placeholder="Saisir numéro de téléphone de technicien">
                                     @error('numtel')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror

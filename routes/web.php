@@ -2,14 +2,15 @@
 
 use App\Models\Materiel;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\directeur\ChefController;
 use App\Http\Controllers\chef\DemandeController;
-use App\Http\Controllers\chef\IncidentController as IncidentController_chef;
-use App\Http\Controllers\directeur\DemandeController as DemandeController_directeur;
-use App\Http\Controllers\responsable\DemandeController as DemandeController_responsable;
-use App\Http\Controllers\directeur\IncidentController as IncidentController_directeur;
+use App\Http\Controllers\directeur\ChefController;
 use App\Http\Controllers\directeur\MaterielController;
 use App\Http\Controllers\directeur\CategorieController;
+use App\Http\Controllers\directeur\TechnicienController;
+use App\Http\Controllers\chef\IncidentController as IncidentController_chef;
+use App\Http\Controllers\directeur\DemandeController as DemandeController_directeur;
+use App\Http\Controllers\directeur\IncidentController as IncidentController_directeur;
+use App\Http\Controllers\responsable\DemandeController as DemandeController_responsable;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +34,18 @@ Route::prefix('directeur')->group(function () {
     Route::get('demandes/{demande_id}/transferer', [DemandeController_directeur::class, 'transferer']);
     Route::resource('materiels', MaterielController::class);
     Route::resource('chefs', ChefController::class);
+    Route::resource('techniciens', TechnicienController::class);
+
+    // Resource est la collection de routes au dissus 
+
+    // Route::get('chefs', [ChefController::class, 'index']);
+    // Route::get('chefs/create', [ChefController::class, 'create']);
+    // Route::post('chefs', [ChefController::class, 'store']);
+    // Route::get('chefs/{id}/edit', [ChefController::class, 'edit']);
+    // Route::put('chefs/{id}', [ChefController::class, 'update']);
+    // Route::delete('chefs/{id}', [ChefController::class, 'destroy']);
     Route::resource('incidents', IncidentController_directeur::class);
-    Route::resource('demandes', DemandeController_directeur::class);
+    Route::get('demandes', [DemandeController_directeur::class, 'index']);
 });
 
 Route::prefix('chef')->group(function () {

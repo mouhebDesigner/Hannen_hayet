@@ -14,7 +14,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Liste des fournitures</h1>
+                            <h1 class="m-0">Liste des incidents</h1>
                         </div><!-- /.col -->
                        
                     </div>
@@ -38,9 +38,15 @@
                                         <div class="col-md-12">
                                             <div class="d-flex justify-content-between">
                                                 <div id="example1_filter" class="dataTables_filter">
-                                                  
+                                                    <label>
+                                                        Search:
+                                                        <input 
+                                                        type="search" class="form-control form-control-sm" 
+                                                        placeholder="" 
+                                                        aria-controls="example1">
+                                                    </label>
                                                 </div>
-                                                <a href="{{ url('/directeur/materiels/create') }}">
+                                                <a href="{{ url('chef/incidents/create') }}">
                                                     <button class="btn-delete">
                                                         <i class="fa fa-plus"></i>
                                                     </button>
@@ -54,19 +60,13 @@
                                                 <thead>
                                                     <tr>
                                                         <th>
-                                                            Nom
+                                                            Titre
                                                         </th>
                                                         <th>
-                                                            Catégorie
+                                                            Date de création
                                                         </th>
                                                         <th>
-                                                            Quantité
-                                                        </th>
-                                                        <th>
-                                                            date de creation
-                                                        </th>
-                                                        <th>
-                                                            date de modification
+                                                            Date de modification
                                                         </th>
                                                         <th>
                                                             Actions
@@ -75,26 +75,15 @@
 
                                                 </thead>
                                                 <tbody>
-                                                    @foreach($materiels as $materiel)
+                                                    @foreach($incidents as $incident)
                                                         <tr>
-                                                            <td>{{ $materiel->nom }}</td>
-                                                            <td>{{ $materiel->categorie }}</td>
-                                                            <td>{{ $materiel->quantite }}</td>
-                                                            <td>{{ $materiel->created_at }}</td>
-                                                            <td>{{ $materiel->updated_at }}</td>
+                                                            <td>{{ $incident->titre }}</td>
+                                                            <td>{{ $incident->created_at->diffForHumans() }}</td>
+                                                            <td>{{ $incident->updated_at->diffForHumans() }}</td>
                                                             <td>
-                                                                <div class="d-flex justify-content-around">
-                                                                    <form action="{{ url('directeur/materiels/'.$materiel->id) }}" method="post">
-                                                                        @csrf
-                                                                        @method('delete')
-                                                                        <button type="submit" class="btn-delete" onclick="return confirm('Voules-vous supprimer cet fourniture')">
-                                                                            <i class="fa fa-trash"></i>
-                                                                        </button>
-                                                                    </form>
-                                                                    <a href="{{ url('directeur/materiels/'.$materiel->id.'/edit') }}" onclick="return confirm('Voules-vous modifier cet fourniture')">
-                                                                        <i class="fa fa-edit"></i>
-                                                                    </a>
-                                                                </div>
+                                                               <a href="{{ url('directeur/techniciens') }}" class="btn btn-primary">
+                                                                Affecter technicien
+                                                               </a>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -102,28 +91,20 @@
                                                 <tfoot>
                                                     <tr>
                                                         <th>
-                                                            Nom
+                                                            Titre
                                                         </th>
                                                         <th>
-                                                            Catégorie
+                                                            Date de création
                                                         </th>
                                                         <th>
-                                                            Quantité
-                                                        </th>
-                                                        <th>
-                                                            date de creation
-                                                        </th>
-                                                        <th>
-                                                            date de modification
+                                                            Date de modification
                                                         </th>
                                                         <th>
                                                             Actions
                                                         </th>
-
                                                     </tr>
                                                 </tfoot>
                                             </table>
-                                            {{ $materiels->links() }}
                                         </div>
                                     </div>
                                 </div>

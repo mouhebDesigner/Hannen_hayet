@@ -14,7 +14,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Liste des fournitures</h1>
+                            <h1 class="m-0">Liste des techniciens</h1>
                         </div><!-- /.col -->
                        
                     </div>
@@ -22,7 +22,8 @@
             </div>
             <div class="content">
                 <div class="container-fluid">
-                    @include('includes.error-message')
+                @include('includes.error-message')
+
                     <div class="row">
                         <div class="col-12">
                             
@@ -38,12 +39,10 @@
                                         <div class="col-md-12">
                                             <div class="d-flex justify-content-between">
                                                 <div id="example1_filter" class="dataTables_filter">
-                                                  
+                                                    
                                                 </div>
-                                                <a href="{{ url('/directeur/materiels/create') }}">
-                                                    <button class="btn-delete">
-                                                        <i class="fa fa-plus"></i>
-                                                    </button>
+                                                <a href="{{ url('directeur/techniciens/create') }}">
+                                                    <i class="fa fa-plus"></i>
                                                 </a>
                                             </div>
                                         </div>
@@ -57,41 +56,46 @@
                                                             Nom
                                                         </th>
                                                         <th>
-                                                            Catégorie
+                                                            Email
                                                         </th>
                                                         <th>
-                                                            Quantité
+                                                            Numéro de téléphone
                                                         </th>
+                                                        <th>
+                                                            Spécialité
+                                                        </th>
+                                                        
                                                         <th>
                                                             date de creation
                                                         </th>
+                                                        
                                                         <th>
                                                             date de modification
                                                         </th>
                                                         <th>
-                                                            Actions
+                                                            Action
                                                         </th>
                                                     </tr>
-
                                                 </thead>
                                                 <tbody>
-                                                    @foreach($materiels as $materiel)
+                                                    @foreach($techniciens as $technicien)
                                                         <tr>
-                                                            <td>{{ $materiel->nom }}</td>
-                                                            <td>{{ $materiel->categorie }}</td>
-                                                            <td>{{ $materiel->quantite }}</td>
-                                                            <td>{{ $materiel->created_at }}</td>
-                                                            <td>{{ $materiel->updated_at }}</td>
+                                                            <td>{{ $technicien->name }}</td>
+                                                            <td>{{ $technicien->email }}</td>
+                                                            <td>{{ $technicien->numtel }}</td>
+                                                            <td>{{ $technicien->specialite }}</td>
+                                                            <td>{{ $technicien->created_at }}</td>
+                                                            <td>{{ $technicien->updated_at }}</td>
                                                             <td>
                                                                 <div class="d-flex justify-content-around">
-                                                                    <form action="{{ url('directeur/materiels/'.$materiel->id) }}" method="post">
+                                                                    <form action="{{ url('directeur/techniciens/'.$technicien->id) }}" method="post">
                                                                         @csrf
                                                                         @method('delete')
-                                                                        <button type="submit" class="btn-delete" onclick="return confirm('Voules-vous supprimer cet fourniture')">
+                                                                        <button type="submit" class="btn-delete" onclick="return confirm('Voules-vous supprimer ce technicien')">
                                                                             <i class="fa fa-trash"></i>
                                                                         </button>
                                                                     </form>
-                                                                    <a href="{{ url('directeur/materiels/'.$materiel->id.'/edit') }}" onclick="return confirm('Voules-vous modifier cet fourniture')">
+                                                                    <a href="{{ url('directeur/techniciens/'.$technicien->id.'/edit') }}" onclick="return confirm('Voules-vous modifier ce technicien')">
                                                                         <i class="fa fa-edit"></i>
                                                                     </a>
                                                                 </div>
@@ -105,25 +109,28 @@
                                                             Nom
                                                         </th>
                                                         <th>
-                                                            Catégorie
+                                                            Email
                                                         </th>
                                                         <th>
-                                                            Quantité
+                                                            Numéro de téléphone
                                                         </th>
+                                                        <th>
+                                                            Spécialité
+                                                        </th>
+                                                        
                                                         <th>
                                                             date de creation
                                                         </th>
+                                                        
                                                         <th>
                                                             date de modification
                                                         </th>
                                                         <th>
-                                                            Actions
+                                                            Action
                                                         </th>
-
                                                     </tr>
                                                 </tfoot>
                                             </table>
-                                            {{ $materiels->links() }}
                                         </div>
                                     </div>
                                 </div>

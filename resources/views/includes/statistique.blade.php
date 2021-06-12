@@ -4,14 +4,14 @@
         <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner">
-            <h3>{{ App\Models\User::count() }}</h3>
+            <h3>{{ App\Models\Materiel::count() }}</h3>
 
-            <p>Les Matiéres</p>
+            <p>Les fournitures</p>
             </div>
             <div class="icon">
             <i class="ion ion-bag"></i>
             </div>
-            <a href="{{ url('matieres') }}" class="small-box-footer">Voir plus <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="{{ url('directeur/materiels') }}" class="small-box-footer">Voir plus <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
 

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Chef;
 
 use Auth;
+use App\Models\User;
 use App\Models\Demande;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DemandeRequest;
+use App\Notifications\RequestAccepted;
 
 class DemandeController extends Controller
 {
@@ -49,6 +51,8 @@ class DemandeController extends Controller
         $demande->user_id = Auth::user()->id;
 
         $demande->save();
+
+        User::where('grade', 'directeur')->first()->notify(new RequestAccepted($demande));
 
         return redirect('chef/demandes')->with('added', 'La demande a été ajouté avec succés');
     }

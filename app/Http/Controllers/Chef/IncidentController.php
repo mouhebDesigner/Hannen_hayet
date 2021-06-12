@@ -40,11 +40,15 @@ class IncidentController extends Controller
      */
     public function store(IncidentRequest $request)
     {
+
+        $technicien_id = User::where('grade', 'technicien')->where('specialite', $request->domaine)->first()->id;
         $incident = new Incident();
 
         $incident->titre = $request->titre;
         $incident->description = $request->description;
+        $incident->domaine = $request->domaine;
         $incident->user_id = Auth::user()->id;
+        $incident->technicien_id = $technicien_id;
 
         $incident->save();
 
